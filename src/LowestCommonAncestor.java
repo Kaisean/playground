@@ -20,20 +20,8 @@ public class LowestCommonAncestor {
 
         System.out.println(lowestCommonAncestor(m0, m1, m2));
         System.out.println(distance(m0, m1, m2));
-    }
 
-    private static int distance(NodeWithChildren root, NodeWithChildren p, NodeWithChildren q) {
-        int x = pathLength(root, p) - 1;
-        int y = pathLength(root, q) - 1;
-        return (x+y) - 2 * (pathLength(root, lowestCommonAncestor(root, p, q)) -1);
-    }
-
-    private static int pathLength(NodeWithChildren root, Node n) {
-        if (root == null) return -1;
-        int x = 0;
-        if (root.equals(n) || (x = pathLength(root.left, n)) > 0 || (x = pathLength(root.right, n)) > 0) {
-            return x + 1;
-        } else return 0;
+        // Given 2
     }
 
     private static NodeWithParent lowestCommonAncestor(NodeWithParent p, NodeWithParent q) {
@@ -62,6 +50,20 @@ public class LowestCommonAncestor {
         else if (left != null) return left;   // If right is null, the left look-ahead must contain the common ancestor.
         else if (right != null) return right; // If left is null, the right look-ahead must contain the common ancestor.
         else return null; // If both left and right are null, root is not a common ancestor.
+    }
+
+    private static int distance(NodeWithChildren root, NodeWithChildren p, NodeWithChildren q) {
+        int x = pathLength(root, p) - 1;
+        int y = pathLength(root, q) - 1;
+        return (x+y) - 2 * (pathLength(root, lowestCommonAncestor(root, p, q)) -1);
+    }
+
+    private static int pathLength(NodeWithChildren root, Node n) {
+        if (root == null) return -1;
+        int x = 0;
+        if (root.equals(n) || (x = pathLength(root.left, n)) > 0 || (x = pathLength(root.right, n)) > 0) {
+            return x + 1;
+        } else return 0;
     }
 
     private abstract static class Node {
