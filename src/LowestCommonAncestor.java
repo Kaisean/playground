@@ -10,7 +10,7 @@ public class LowestCommonAncestor {
         NodeWithParent n2 = new NodeWithParent(1);
         n2.parent = n0;
 
-        System.out.println(lowestCommonAncestor(n0, n1, n2));
+        System.out.println(lowestCommonAncestor(n1, n2));
 
         NodeWithChildren m0 = new NodeWithChildren(3);
         NodeWithChildren m1 = new NodeWithChildren(5);
@@ -19,9 +19,24 @@ public class LowestCommonAncestor {
         m0.right = m2;
 
         System.out.println(lowestCommonAncestor(m0, m1, m2));
+        System.out.println(distance(m0, m1, m2));
     }
 
-    private static NodeWithParent lowestCommonAncestor(NodeWithParent root, NodeWithParent p, NodeWithParent q) {
+    private static int distance(NodeWithChildren root, NodeWithChildren p, NodeWithChildren q) {
+        int x = pathLength(root, p) - 1;
+        int y = pathLength(root, q) - 1;
+        return (x+y) - 2 * (pathLength(root, lowestCommonAncestor(root, p, q)) -1);
+    }
+
+    private static int pathLength(NodeWithChildren root, Node n) {
+        if (root == null) return -1;
+        int x = 0;
+        if (root.equals(n) || (x = pathLength(root.left, n)) > 0 || (x = pathLength(root.right, n)) > 0) {
+            return x + 1;
+        } else return 0;
+    }
+
+    private static NodeWithParent lowestCommonAncestor(NodeWithParent p, NodeWithParent q) {
         Set<NodeWithParent> visited = new HashSet<>();
         while (p != null || q != null) {
             if (p != null) {
