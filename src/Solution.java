@@ -35,7 +35,7 @@ public class Solution {
         else return leastCommonAncestor(n1.parent, n2.parent);
     }
 
-    static class Node {
+    private static class Node {
         public Node left;
         public Node right;
         public Node parent;
