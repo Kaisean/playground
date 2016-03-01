@@ -24,6 +24,13 @@ public class LowestCommonAncestor {
         // Given 2
     }
 
+    private static void levelOrder(NodeWithChildren root, StringBuilder sb) {
+        if(root == null) return;
+        sb.append(root.key + " ");
+        levelOrder(root.left, sb);
+        levelOrder(root.right, sb);
+    }
+
     private static NodeWithParent lowestCommonAncestor(NodeWithParent p, NodeWithParent q) {
         Set<NodeWithParent> visited = new HashSet<>();
         while (p != null || q != null) {
@@ -58,6 +65,11 @@ public class LowestCommonAncestor {
         return (x+y) - 2 * (pathLength(root, lowestCommonAncestor(root, p, q)) -1);
     }
 
+    /*
+     * Execute a BFS from the root. If you get a node hit, return length, else return -1.
+     *
+     * If node not in tree with root, return 0.
+     */
     private static int pathLength(NodeWithChildren root, Node n) {
         if (root == null) return -1;
         int x = 0;
