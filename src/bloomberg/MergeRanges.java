@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Given a list of 1-D ranges [(-3, 3), (4, 5), (1, 4), ...]
  * <p>
- * Find an algorithm that can merge the overlapping ranges to
+ * Find an algorithm that can merge the <u>overlapping</u> ranges to
  * create a list of unique encompassing ranges.
  * <p>
  * i.e.
@@ -37,15 +37,16 @@ public class MergeRanges {
         input.add(new Range(-4, -2));
         input.add(new Range(-1, 1));
         input.add(new Range(-3, 3));
+        input.add(new Range(4, 5));
         input.add(new Range(7, 10));
 
-        long myStart = System.currentTimeMillis();
-        printList(mergeRanges(input));
-        long myEnd = System.currentTimeMillis();
-
         long theirStart = System.currentTimeMillis();
-        printList(mergeRangesOfficial(input));
+        System.out.print("Their List: "); printList(mergeRangesOfficial(input));
         long theirEnd = System.currentTimeMillis();
+
+        long myStart = System.currentTimeMillis();
+        System.out.print("My List: "); printList(mergeRanges(input));
+        long myEnd = System.currentTimeMillis();
 
         System.out.println("My Time: " + (myEnd - myStart));
         System.out.println("Their Time: " + (theirEnd - theirStart));
@@ -90,7 +91,7 @@ public class MergeRanges {
         }
 
         List<Range> output = new ArrayList<>();
-        boolean curr = false, next = false;
+        boolean curr = false;
         int lo = 0;
         for (int i = 0; i < range.length; i++) {
             if (!curr && range[i]) {

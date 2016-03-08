@@ -1,13 +1,11 @@
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
 public class NSidedDie {
-    public int N;
-    private Random rng = new Random();
+    private int N;
+    private final Random rng = new Random();
     private boolean fair;
     private double[] cumsum;
 
